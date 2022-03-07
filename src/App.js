@@ -1,25 +1,35 @@
 import logo from './logo.svg';
 import './App.css';
+import {useEffect, useState} from 'react';
+
 
 function App() {
+  const [name, setName] = useState(null);
+
+ 
+  
+  const fetchName = async () => {
+    const response = await fetch('https://jsonplaceholder.typicode.com/albums');
+   
+    setName(await response.json());
+  }
+
+  
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <h1>Test</h1>
+      <input type="text" placeholder="Enter Album ID:" />
+      <button onClick={fetchName}>Submit</button>
+       <ol className="App-list">
+    {name && name.map((data) =>{
+      return <li key={data.id}>{data.title}</li>
+    })}
+    </ol>
+    
+      </div>
+    
   );
+
 }
 
 export default App;
