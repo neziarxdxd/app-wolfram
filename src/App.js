@@ -7,7 +7,7 @@ function App() {
   const [name, setName] = useState(null);
   
   const fetchName = async () => {
-    const response = await fetch('https://jsonplaceholder.typicode.com/albums');
+    const response = await fetch('https://jsonplaceholder.typicode.com/users/');
     setName(await response.json());
   }
 
@@ -17,11 +17,14 @@ function App() {
       <h1>Test</h1>
       <input type="text" placeholder="Enter Album ID:" />
       <button onClick={fetchName}>Submit</button>
-       <ol className="App-list">
+       <div  className="app-list">
     {name && name.map((data) =>{
-      return <li key={data.id}>{data.title}</li>
+      return <div className='card-user'>
+        <div className='textHead'> {data.name} </div>
+        <div className='subText'> {data.email}</div>
+         </div>
     })}
-    </ol>
+    </div>
     
       </div>
     
